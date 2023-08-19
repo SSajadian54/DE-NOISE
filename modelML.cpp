@@ -69,7 +69,7 @@ int main()
    
     tE= RandR(20.0,60.0);  
     t0= 0.0;  
-    u0=RandR(0.1,0.9);  
+    u0=RandR(0.0,1.0);  
     mbase=RandR(18.5,21.0);  
     fb=RandR(0.1,1.0);  
     q=RandR(-3.5,-1.5);  
@@ -109,8 +109,8 @@ int main()
     if(timp>cade){
     timp=timp-cade; 
     sigma=Errogle(magni1); 
-    errm = fabs(RandN(sigma,2.5));
-    if(ndat%2==0)  errm=-1.0*errm;  
+    errm = RandN(sigma,5.0);
+    //if(ndat%2==0)  errm=-1.0*errm;  
     fprintf(fil1, "%.5lf     %.6lf     %.6lf  %.5lf  %.5lf\n", tim, magni1+errm,sigma,magni0,magni1);
     chi1+= double(magni1+errm-magni0)*(magni1+errm-magni0)/(sigma*sigma); 
     chi2+= double(magni1+errm-magni1)*(magni1+errm-magni1)/(sigma*sigma);
@@ -121,10 +121,10 @@ int main()
     fclose(fil1);  
     dchi=fabs(chi1-chi2);  
     STD=sqrt( STD/(ndat-1.0)); 
-    fprintf(param,"%d  %.5lf  %.5lf   %.5lf   %.5lf   %.5lf   %.5lf   %.5lf   %.5lf  %.1lf %.1lf  %.4lf  %d   %.7lf\n", 
-    i, u0, t0, tE, mbase, fb,  q, dis, ksi,  chi1, chi2, dchi, ndat, STD);
+    fprintf(param,"%d  %.5lf  %.5lf   %.5lf   %.5lf   %.5lf   %.5lf   %.5lf   %.5lf  %.1lf %.1lf  %.4lf  %d   %.7lf  %.8lf\n", 
+    i, u0, t0, tE, mbase, fb,  q, dis, ksi,  chi1, chi2, dchi, ndat, STD, rho);
     i+=1; 
-    }while(i<500);    
+    }while(i<1000);    
   //}  
     fclose(param);  
 return(0); 
